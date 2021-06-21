@@ -184,3 +184,29 @@ class Restaurant(Place, Rating):
 
     class Meta(Rating.Meta):
         db_table = "my_restaurant"
+
+# proxy models
+
+class MyPerson(Person):
+    class Meta:
+        proxy = True
+
+    def do_something(self):
+        # ...
+        pass
+
+class OrderedPerson(Person):
+    class Meta:
+        ordering = ["last_name"]
+        proxy = True
+
+# multiple inheritance
+class Product:
+    product_id = models.AutoField(primary_key=True)
+
+class Review(models.Model):
+    review_id = models.AutoField(primary_key=True)
+    ...
+
+class ProductReview(Product, Review):
+    pass
